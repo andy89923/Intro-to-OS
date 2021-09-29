@@ -1,3 +1,5 @@
+all: 2 3
+
 2: hw1_2.cpp
 	g++ hw1_2.cpp -o 2.out
 
@@ -7,8 +9,6 @@
 test: shell 2.out
 	./2.out
 	./shell
-
-all: 2 3
 
 clean:
 	rm shell
