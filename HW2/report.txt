@@ -1,0 +1,11 @@
+Q1.
+Briefly describe about your data structure for recording process’ time or anything you need to record.
+
+Q2.
+How to simulate process scheduling?
+
+Q3.
+Some problems you meet and how to resolve.
+
+Q4.
+What you learned from doing OS hw3 and something you want to discuss with TAs.
