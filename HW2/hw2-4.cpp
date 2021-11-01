@@ -22,7 +22,10 @@ struct Job {
 
 	// SRTF
 	bool operator < (const Job& rhs) const {
-		return cpu_time > rhs.cpu_time;
+        if (cpu_time != rhs.cpu_time)
+    		return cpu_time > rhs.cpu_time;
+        else
+            return arv_time > rhs.arv_time;
 	}
 };
 

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <algorithm>
 using namespace std;
 
 struct Job {
@@ -19,7 +20,10 @@ struct Job {
 	
 	// SJF
 	bool operator < (const Job& rhs) const {
-		return cpu_time > rhs.cpu_time;
+		if (cpu_time != rhs.cpu_time)
+            return cpu_time > rhs.cpu_time;
+        else
+            return arv_time > rhs.arv_time;
 	}
 };
 

@@ -1,5 +1,5 @@
 all: 1 2 3 4
-	clear && echo "================================================\n\nMake All Finished\n"
+	clear && printf "================================================\n\nMake All Finished\n"
 
 1: hw2-1.cpp
 	g++ hw2-1.cpp -o hw2-1 -std=c++11
@@ -14,10 +14,10 @@ all: 1 2 3 4
 	g++ hw2-4.cpp -o hw2-4 -std=c++11
 
 test: 1 2 3 4
-	clear && echo "\033[33mStart testing...\033[0m" && \
-	for i in 1 2 3 4; do echo "\n\nTest" $${i}; ./hw2-$${i} < ./Test_cases/Q$${i}.txt; sleep 0.5; done && \
-	echo "======================================================" && \
-	echo "\033[92mTesting Complete!\033[0m"
+	clear && printf "\033[33mStart testing...\033[0m\n" && \
+	for i in 1 2 3 4; do printf "\n\nTest %d\n" $${i}; ./hw2-$${i} < ./Test_cases/Q$${i}.txt; sleep 0.5; done&& \
+	printf "======================================================\n" && \
+	printf "\033[92mTesting Complete!\033[0m\n"
 
 clean:
 	rm -f hw2-1 hw2-2 hw2-3 hw2-4
