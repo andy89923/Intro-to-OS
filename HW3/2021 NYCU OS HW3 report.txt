@@ -1,0 +1,16 @@
+2021 NYCU OS HW3 report
+
+Q1.
+Briefly describe your design for the sorting algorithm,  merge function, the thread management.
+Also, describing the number of sort threads and number of merge threads in the Multi-thread program. 
+
+Q2.
+Show the fastest time acceleration between single-thread and multi-thread. (Take screenshots of the time between single-thread and multi-thread)
+
+Q3.
+You need a brief description of the best 
+multi-threads and worst multi-threads methods. 
+The content includes the number of threads used and the way of partitioning, comparing the difference in time, and taking the screenshot between two multi-thread results.
+
+Q4.
+What did you learn from doing hw3?
