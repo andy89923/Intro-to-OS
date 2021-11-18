@@ -14,3 +14,45 @@ The content includes the number of threads used and the way of partitioning, com
 
 Q4.
 What did you learn from doing hw3?
+
+---------------------------------------------------
+
+11/15 補充 OS_HW3.pdf 的說明：
+
+1. OS_HW3.pdf 中有提到，同學輸出Sorting結果時，必須以空格隔開每一個Sorting結果。因此這也包含輸出的最後一個數字，最後一個輸出數字的後面同樣也需要一格空格。
+
+ex: cout << 數字 << " ";  
+
+使用此輸出方法再與 answer1.txt 或 answer2.txt 進行比對之後才不會出現檔案比對不一致的地方。
+
+2. input1.txt 與 input2.txt 兩筆測試資料的與數量數值範圍相差甚大。input1.txt中有10000個數字，數值範圍介於0到900000之間。input2.txt中有1000000個數字，數值範圍介於0到1000000。
+
+---------------------------------------------------
+
+11/16 diff 比較指令與 vim 編輯 output.txt 的補充說明：
+
+1.  如果同學有使用vim編輯 output.txt，請同學盡量以快捷鍵 shift+zz(兩次z) 儲存編輯後的結果(或是沒出現後續提及的問題的話也可以使用:wq來儲存)。否則透過diff指令比對output.txt 與 answer.txt 兩個檔案後，會發現 output.txt 會多出一格空格(儘管沒更動到 output.txt 裡面的內容)。
+
+2.  假設同學使用diff --suppress-common-lines answer.txt ouput.txt 比對兩個檔案內容(假設確認檔案內容都一樣後)，發現檔案比對不一致。 但透過vim打開output.txt 後發現 "no new line at the end of file" 的 warning 時。同學可以另外嘗試使用diff -w --suppress-common-lines answer.txt ouput.txt (-w 為忽略warning) 指令比對output.txt 與 answer.txt 。助教也會使用這個指令來測試同學的作業。
+
+
+
+---------------------------------------------------
+
+11/17 課程中講解作業的問題補充說明：
+
+1. 同學可以自行決定report中的第二點(single thread v.s. multi thread)的single thread要與worst的multi thread比較還是與best的multi thread比較，但同學要注意的第一點是single thread與multi thread比較的時候，sorting algorithm、partition的數量、partition的內容物 必須要相同。第二點是single thread與multi thread的三種檔案內，其執行的時間秒數必須要 best multithread < worst multithread < single thread。
+
+2. 同學可自行決定在sorting部份中要使用哪一種sorting方法，OS_HW3.pdf裡面的buble sort只是舉例(brute‐force methods，時間複雜度較高)。另外請同學要注意的是single thread與multithread實作的sort algorithm必須要一樣，還有一定要拆分資料成partition再merge。
+
+3. 同學可以透過lscpu指令查詢電腦支持幾個thread。
+
+4. 助教這邊在改作業時使用的測資，其測資的數字數量最大不會超過1000000，數值的範圍會介於0~1000000之間。
+
+5. 這次作業可以壓縮.c 檔或是 .cpp檔案。(OS_HW3.pdf的壓縮範例的.c只是參考)
+
+6. 建議同學還是自己寫一個sorting algorithm(不要call 系統的sort())
+
+7. 在這次的作業中，並無設定baseline。主要是希望同學比較single thread的時間與multi thread的時間差異。(因此不會說你的multi thread方法的執行時間要低於哪個時間才會有分數，OS_HW3.pdf裡面grading部份中的single thread與multi thread的佔分只是sorting的結果。時間差異等佔分則是在report裡面)。
+
+---------------------------------------------------
