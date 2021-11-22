@@ -2,7 +2,7 @@
 #include <pthread.h>
 using namespace std;
 
-#define NUM_OF_SEG 2
+#define NUM_OF_SEG 3
 
 struct segment {
 	int lef, rig;
