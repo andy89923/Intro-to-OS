@@ -2,7 +2,7 @@
 #include <pthread.h>
 using namespace std;
 
-#define NUM_OF_SEG 2
+#define NUM_OF_SEG 4
 
 struct segment {
 	int lef, rig;
@@ -17,6 +17,7 @@ void* bubble_sort(void* s) {
 			if (now.v[i] > now.v[j]) swap(now.v[i], now.v[j]);
 		}
 	}
+    return NULL;
 }
 
 struct twoSegment {
@@ -55,6 +56,8 @@ void* merge(void* s) {
 	while (x2 < y2) { tmp.push_back(v[x2]); x2++; };
 
 	for (int i = now.x1, j = 0; i < now.y2; i++, j++) v[i] = tmp[j];
+
+    return NULL;
 }
 
 int main() {
@@ -70,20 +73,21 @@ int main() {
 
 
 	pthread_t* thread_handles = (pthread_t*) malloc(NUM_OF_SEG * sizeof(pthread_t));
+    segment* segments = (segment*) calloc(NUM_OF_SEG, sizeof(segment));
+
 	int m = n / NUM_OF_SEG;
 	int lef = 0, rig = m;
-	vector<segment> segments;
+    int seg_siz = 0;
 
 	for (int i = 0; i < NUM_OF_SEG; i++) {
 		if (i == NUM_OF_SEG - 1) rig = n;
 
-		segment now;
-		now.lef = lef;
-		now.rig = rig;
-		now.v = v;
+		segments[i].lef = lef;
+		segments[i].rig = rig;
+		segments[i].v = v;
 
-		segments.push_back(now);
 		pthread_create(&thread_handles[i], (pthread_attr_t*) NULL, bubble_sort, (void*) &segments[i]);
+        seg_siz += 1;
 
 		lef = rig;
 		rig = lef + m;
@@ -93,13 +97,13 @@ int main() {
 	segment*    tmp = (segment*)    calloc(NUM_OF_SEG, sizeof(segment));
 	twoSegment* tsg = (twoSegment*) calloc(NUM_OF_SEG, sizeof(twoSegment));
 
-	while (segments.size() >= 2) {
-		int p = 0, r = 0;
-		for (int i = 0; i < segments.size(); i += 2) {
+	while (seg_siz >= 2) {
+		int p = 0, new_seg = 0;
+		for (int i = 0; i < seg_siz; i += 2) {
 			
-			if (i == segments.size() - 1) {
-				tmp[r] = segments[i];
-				r++;
+			if (i == seg_siz - 1) {
+				tmp[new_seg] = segments[i];
+				new_seg ++;
 				continue;
 			}
 
@@ -109,15 +113,17 @@ int main() {
 
 			// cout << tsg[p].x1 << ' ' << tsg[p].y1 << ' ' << tsg[p].x2 << ' ' << tsg[p].y2 << endl;
 			
-			tmp[r++] = (segment){ tsg[p].x1, tsg[p].y2, tsg[p].v };
+			tmp[new_seg++] = (segment){ tsg[p].x1, tsg[p].y2, tsg[p].v };
 
 			pthread_create(&thread_handles[p], (pthread_attr_t*) NULL, merge, (void*) &tsg[p]);
 			p += 1;
 		}
 		for (int i = 0; i < p; i++) pthread_join(thread_handles[i], NULL);
-
-		segments.clear();
-		for (int i = 0; i < r; i++) segments.push_back(tmp[i]);
+        
+        segment* tp = segments;
+        segments = tmp;
+        tmp = tp;
+        seg_siz = new_seg;
 	}
 	for (int i = 0; i < n; i++) cout << v[i] << ' ';
 	cout << '\n';
@@ -125,5 +131,6 @@ int main() {
 	free(thread_handles);
 	free(tmp);
 	free(tsg);
+    free(segments);
 	return 0;
 }
