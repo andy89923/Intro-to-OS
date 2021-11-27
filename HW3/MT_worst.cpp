@@ -2,7 +2,8 @@
 #include <pthread.h>
 using namespace std;
 
-#define NUM_OF_SEG 4
+#define NUM_OF_THR 3
+#define NUM_OF_SEG 16
 
 struct segment {
 	int lef, rig;
@@ -86,13 +87,18 @@ int main() {
 		segments[i].rig = rig;
 		segments[i].v = v;
 
-		pthread_create(&thread_handles[i], (pthread_attr_t*) NULL, bubble_sort, (void*) &segments[i]);
         seg_siz += 1;
 
 		lef = rig;
 		rig = lef + m;
 	}
-	for (int i = 0; i < NUM_OF_SEG; i++) pthread_join(thread_handles[i], NULL);
+	for (int i = 0; i < NUM_OF_SEG; i += NUM_OF_THR) {
+		for (int j = 0; j < NUM_OF_THR; j++) if (i + j < NUM_OF_SEG)
+			pthread_create(&thread_handles[i + j], (pthread_attr_t*) NULL, bubble_sort, (void*) &segments[i + j]);
+		
+		for (int j = 0; j < NUM_OF_THR; j++) if (i + j < NUM_OF_SEG)
+			pthread_join(thread_handles[i + j], NULL);
+	}
 
 	segment*    tmp = (segment*)    calloc(NUM_OF_SEG, sizeof(segment));
 	twoSegment* tsg = (twoSegment*) calloc(NUM_OF_SEG, sizeof(twoSegment));
@@ -112,13 +118,16 @@ int main() {
 			tsg[p].v = segments[i].v;
 
 			// cout << tsg[p].x1 << ' ' << tsg[p].y1 << ' ' << tsg[p].x2 << ' ' << tsg[p].y2 << endl;
-			
 			tmp[new_seg++] = (segment){ tsg[p].x1, tsg[p].y2, tsg[p].v };
-
-			pthread_create(&thread_handles[p], (pthread_attr_t*) NULL, merge, (void*) &tsg[p]);
 			p += 1;
 		}
-		for (int i = 0; i < p; i++) pthread_join(thread_handles[i], NULL);
+		for (int i = 0; i < p; i += NUM_OF_THR) {
+			for (int j = 0; j < NUM_OF_THR; j++) if (i + j < p)
+				pthread_create(&thread_handles[i + j], (pthread_attr_t*) NULL, merge, (void*) &tsg[i + j]);
+			
+			for (int j = 0; j < NUM_OF_THR; j++) if (i + j < p)
+				pthread_join(thread_handles[i + j], NULL);
+		}
         
         segment* tp = segments;
         segments = tmp;

@@ -1,7 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define NUM_OF_SEG 4 
+#define NUM_OF_THR 1
+#define NUM_OF_SEG 16
 
 struct segment {
 	int lef, rig;
