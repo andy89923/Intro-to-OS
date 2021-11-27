@@ -1,4 +1,4 @@
-CXX := g++-7
+CXX := g++
 
 st: ST.cpp
 	$(CXX) -std=c++11 -o st ST.cpp -O3
@@ -17,7 +17,7 @@ mt: MT_best.cpp MT_worst.cpp
 ac_mt: mt
 	./mt_best < ./Testcase/input1.txt > output.txt && diff -w --suppress-common-lines ./Testcase/answer1.txt output.txt | wc -l && rm -f output.txt
 	./mt_best < ./Testcase/input2.txt > output.txt && diff -w --suppress-common-lines ./Testcase/answer2.txt output.txt | wc -l && rm -f output.txt
-	./mt_worst < ./Testcase/input2.txt > output.txt && diff -w --suppress-common-lines ./Testcase/answer2.txt output.txt | wc -l && rm -f output.txt
+	./mt_worst < ./Testcase/input1.txt > output.txt && diff -w --suppress-common-lines ./Testcase/answer1.txt output.txt | wc -l && rm -f output.txt
 	./mt_worst < ./Testcase/input2.txt > output.txt && diff -w --suppress-common-lines ./Testcase/answer2.txt output.txt | wc -l && rm -f output.txt
 
 test: st mt
