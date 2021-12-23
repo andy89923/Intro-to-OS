@@ -5,4 +5,4 @@ Compare results between hw4_1_2 with/without synchronization.
 Q3:
 Compare results between hw4_2 with/without synchronization.
 Q4:
-Some problems you meet and how to resolve. or some Reflections.
+Some problems you meet and how to resolve. or some Reflections.

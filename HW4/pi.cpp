@@ -3,7 +3,7 @@
 #include <time.h>
 #include <pthread.h>
 #include <unistd.h>
-#include <iostream>
+#include <climits>
 #define eps 1e-9
 
 pthread_mutex_t mutex;
