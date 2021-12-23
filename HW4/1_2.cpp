@@ -98,6 +98,10 @@ int main(int argc, char const *argv[]) {
 	}
 
 	pthread_mutex_destroy(&mutex);
+	pthread_mutex_destroy(&mutex1);
+	pthread_mutex_destroy(&mutex2);
+	pthread_mutex_destroy(&mutex3);
+	pthread_mutex_destroy(&mutex22);
 	free(thread_handles);
 	free(c);
 	free(args);

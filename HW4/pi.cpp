@@ -21,20 +21,17 @@ void* thread_func(void* tim) {
 	unsigned int mystatey = time(NULL) ^ rand();
 
 	double x, y;
-	long long tmp_ans = 0;
 
 	for (long long i = 0; i < t; ++i) {
 		x = rang * rand_r(&mystatex) / (RAND_MAX + 1.0) + rand_min;
 		y = rang * rand_r(&mystatey) / (RAND_MAX + 1.0) + rand_min;
 
-		if (x * x + y * y - rand_max <= eps) tmp_ans += 1;
+		if (x * x + y * y - rand_max <= eps) {
+			pthread_mutex_lock(&mutex);
+			ans += 1;
+			pthread_mutex_unlock(&mutex);
+		}
 	}
-
-	pthread_mutex_lock(&mutex);
-	ans += tmp_ans;
-	pthread_mutex_unlock(&mutex);
-
-
 	pthread_exit(NULL);
 }
 

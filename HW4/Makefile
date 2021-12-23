@@ -23,8 +23,9 @@ zip:
 	cp 1_1.cpp hw4_1_1.cpp
 	cp 1_2.cpp hw4_1_2.cpp
 	cp pi.cpp hw4_2.cpp
+	cp report.pdf hw4_report.pdf
 	zip 0816153_OS_hw4.zip hw4_1_1.cpp hw4_1_2.cpp hw4_2.cpp hw4_report.pdf
-	rm -f hw4_1_1.cpp hw4_1_2.cpp hw4_2.cpp
+	rm -f hw4_1_1.cpp hw4_1_2.cpp hw4_2.cpp hw4_report.pdf
 
 clean:
 	rm -f hw4_1_1.cpp hw4_1_2.cpp hw4_2.cpp
