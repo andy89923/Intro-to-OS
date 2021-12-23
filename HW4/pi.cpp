@@ -24,8 +24,8 @@ void* thread_func(void* tim) {
 	long long tmp_ans = 0;
 
 	for (long long i = 0; i < t; ++i) {
-		x = rang * rand_r(&mystatex) / (INT_MAX + 1.0) + rand_min;
-		y = rang * rand_r(&mystatey) / (INT_MAX + 1.0) + rand_min;
+		x = rang * rand_r(&mystatex) / (RAND_MAX + 1.0) + rand_min;
+		y = rang * rand_r(&mystatey) / (RAND_MAX + 1.0) + rand_min;
 
 		if (x * x + y * y - rand_max <= eps) tmp_ans += 1;
 	}
